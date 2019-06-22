@@ -15,6 +15,13 @@ public class Actor {
 		this.lastName = lastName;
 	}
 	
+	
+
+	public Actor() {
+		super();
+	}
+
+
 
 	public Actor(List<Film> films) {
 		super();

@@ -214,10 +214,10 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film [ id: " + id + ", title: " + title + ", description: " + description + ", releaseYear: "
-				+ releaseYear + ", languageId: " + languageId + ", rentalDuration: " + rentalDuration + ", rentalRate: "
-				+ rentalRate + ", length: " + length + ", replacementCost: " + replacementCost + ", rating: " + rating
-				+ ", specialFeatures: " + specialFeatures + "]";
+		return "Film  \nid: " + id + " \ntitle: " + title + " \ndescription: " + description + " \nreleaseYear: "
+				+ releaseYear + " \nlanguageId: " + languageId + " \nrentalDuration: " + rentalDuration + " \nrentalRate: "
+				+ rentalRate + " \nlength: " + length + " \nreplacementCost: " + replacementCost + " \nrating: " + rating
+				+ " \nspecialFeatures: " + specialFeatures + "]";
 	}
 	public void printActors() {
 		for (Actor actor : actors) {
