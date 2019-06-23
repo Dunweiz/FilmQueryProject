@@ -26,9 +26,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		Film films = null;
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT id, title, description, release_year, language_id,"
-					+ "rental_duration, rental_rate, length, replacement_cost," + "rating, special_features"
-					+ " FROM film WHERE id = ?";
+			String sql = "SELECT film.id, film.title, film.description, film.release_year, film.language_id,"
+					+ "film.rental_duration, film.rental_rate, film.length, film.replacement_cost," + "film.rating, film.special_features, language.name"
+					+ " FROM film JOIN language on film.language_id = language.id WHERE film.id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
@@ -45,6 +45,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				films.setReplacementCost(rs.getDouble("replacement_cost"));
 				films.setRating(rs.getString("rating"));
 				films.setSpecialFeatures(rs.getString("special_features"));
+				
 				films.setActors(findActorsByFilmId(filmId));
 
 			}
@@ -114,9 +115,24 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		List<Film> films = new ArrayList<>();
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT id, title, description, release_year, language_id,"
-					+ "rental_duration, rental_rate, length, replacement_cost," + "rating, special_features"
-					+ " FROM film WHERE film.title LIKE ? OR film.description LIKE ?";
+			String sql = "SELECT film.id, "
+					+ "film.title, "
+					+ "film.description, "
+					+ "film.release_year,"
+					+ "film.language_id, "
+					+ "film.rental_duration, "
+					+ "film.rental_rate, "
+					+ "film.length, "
+					+ "film.replacement_cost, "
+					+ "film.rating, "
+					+ "film.special_features, "
+					+ "language.name "
+					+ "FROM film "
+					+ "JOIN language on film.language_id = language.id "
+					+ "WHERE "
+					+ "film.title LIKE ? "
+					+ "OR "
+					+ "film.description LIKE ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, "%" + filmKeyW + "%");
 			pstmt.setString(2, "%" + filmKeyW + "%");
@@ -134,6 +150,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				film.setReplacementCost(rs.getDouble("replacement_cost"));
 				film.setRating(rs.getString("rating"));
 				film.setSpecialFeatures(rs.getString("special_features"));
+				film.setLanguage(rs.getString("language.name"));
 				films.add(film);
 			}
 		} catch (SQLException e) {

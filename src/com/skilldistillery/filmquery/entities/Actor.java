@@ -6,7 +6,6 @@ public class Actor {
 	private int id;
 	private String firstName;
 	private String lastName;
-	private List<Film> films;
 
 	public Actor(int id, String firstName, String lastName) {
 		super();
@@ -14,20 +13,10 @@ public class Actor {
 		this.firstName = firstName;
 		this.lastName = lastName;
 	}
-	
-	
 
 	public Actor() {
 		super();
 	}
-
-
-
-	public Actor(List<Film> films) {
-		super();
-		this.films = films;
-	}
-
 
 	public int getId() {
 		return id;
@@ -52,21 +41,11 @@ public class Actor {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
-
-	public List<Film> getFilms() {
-		return films;
-	}
-
-	public void setFilms(List<Film> films) {
-		this.films = films;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((films == null) ? 0 : films.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -82,11 +61,6 @@ public class Actor {
 		if (getClass() != obj.getClass())
 			return false;
 		Actor other = (Actor) obj;
-		if (films == null) {
-			if (other.films != null)
-				return false;
-		} else if (!films.equals(other.films))
-			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
 				return false;
@@ -104,15 +78,6 @@ public class Actor {
 
 	@Override
 	public String toString() {
-		return "Actor [id: " + id + ", firstName: " + firstName + ", lastName: " + lastName + "]";
+		return firstName + lastName;
 	}
-	public void printFilms() {
-		for (Film film : films) {
-			System.out.println(film.getId() + " " + film.getTitle() + " " + film.getDescription() + 
-					" " + film.getReleaseYear() + " " + film.getLanguageId() + " " + film.getRentalDuration()
-					+ " " + film.getRentalRate() + " " + film.getLength() + " " + film.getReplacementCost() 
-					+ " " + film.getRating() + " " + film.getSpecialFeatures());
-		}
-	}
-
 }

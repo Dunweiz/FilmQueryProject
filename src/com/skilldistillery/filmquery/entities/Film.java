@@ -14,6 +14,7 @@ public class Film {
 	private double replacementCost;
 	private String rating;
 	private String specialFeatures;
+	private String language;
 	private List<Actor> actors;
 
 	public Film(int id, String title, String description, int releaseYear, int languageId, int rentalDuration,
@@ -32,6 +33,26 @@ public class Film {
 		this.specialFeatures = specialFeatures;
 	}
 	
+	
+
+	public String getLanguage() {
+		return language;
+	}
+
+
+
+	public Film(String language) {
+		super();
+		this.language = language;
+	}
+	
+
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+
 
 	public Film(List<Actor> actors) {
 		super();
@@ -146,6 +167,7 @@ public class Film {
 		result = prime * result + ((actors == null) ? 0 : actors.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((language == null) ? 0 : language.hashCode());
 		result = prime * result + languageId;
 		result = prime * result + length;
 		result = prime * result + ((rating == null) ? 0 : rating.hashCode());
@@ -182,6 +204,11 @@ public class Film {
 			return false;
 		if (id != other.id)
 			return false;
+		if (language == null) {
+			if (other.language != null)
+				return false;
+		} else if (!language.equals(other.language))
+			return false;
 		if (languageId != other.languageId)
 			return false;
 		if (length != other.length)
@@ -214,10 +241,10 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film  \nid: " + id + " \ntitle: " + title + " \ndescription: " + description + " \nreleaseYear: "
-				+ releaseYear + " \nlanguageId: " + languageId + " \nrentalDuration: " + rentalDuration + " \nrentalRate: "
-				+ rentalRate + " \nlength: " + length + " \nreplacementCost: " + replacementCost + " \nrating: " + rating
-				+ " \nspecialFeatures: " + specialFeatures + "]";
+		return "Film:  id:" + "\t " + id + " \ntitle:" + "\t" + title + " \ndescription:" + "\t" + description + " \nreleaseYear:" + "\t" + releaseYear
+				+ " \nlanguageId:" + "\t" + languageId + " \nrentalDuration:" + "\t" + rentalDuration + " \nrentalRate:" + "\t" + rentalRate
+				+ " \nlength:" + length + ", \nreplacementCost:" + replacementCost + ", \nrating:" + rating
+				+ " \nspecialFeatures:" + "\t" + specialFeatures + " \nlanguage:" + "\t" + language;
 	}
 	public void printActors() {
 		for (Actor actor : actors) {
