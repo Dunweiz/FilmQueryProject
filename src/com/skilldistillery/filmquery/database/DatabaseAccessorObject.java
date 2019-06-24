@@ -26,9 +26,22 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		Film films = null;
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT film.id, film.title, film.description, film.release_year, film.language_id,"
-					+ "film.rental_duration, film.rental_rate, film.length, film.replacement_cost," + "film.rating, film.special_features, language.name"
-					+ " FROM film JOIN language on film.language_id = language.id WHERE film.id = ?";
+			String sql = "SELECT film.id, "
+					+ "film.title, "
+					+ "film.description, "
+					+ "film.release_year, "
+					+ "film.language_id, "
+					+ "film.rental_duration, "
+					+ "film.rental_rate, "
+					+ "film.length, "
+					+ "film.replacement_cost, "
+					+ "film.rating, "
+					+ "film.special_features, "
+					+ "language.name "
+					+ "FROM film "
+					+ "JOIN language "
+					+ "on film.language_id = language.id "
+					+ "WHERE film.id = ?";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, filmId);
 			ResultSet rs = stmt.executeQuery();
@@ -64,7 +77,10 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		Actor actor = null;
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
-			String sql = "SELECT id, first_name, last_name from actor where id = ? ";
+			String sql = "SELECT id, "
+					+ "first_name, "
+					+ "last_name from actor "
+					+ "where id = ? ";
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, actorId);
 			ResultSet rs = stmt.executeQuery();
@@ -88,9 +104,15 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		List<Actor> actors = new ArrayList<>();
 		try {
 			Connection conn = DriverManager.getConnection(URL, user, pass);
-			String sql = " select actor.id, actor.first_name, actor.last_name" + " from actor\n"
-					+ " join film_actor on actor.id = film_actor.actor_id\n"
-					+ " join film on film.id = film_actor.film_id\n" + " where film.id = ?";
+			String sql = "SELECT actor.id, "
+					+ "actor.first_name, "
+					+ "actor.last_name " 
+					+ "FROM actor\n "
+					+ "JOIN film_actor "
+					+ "ON actor.id = film_actor.actor_id\n "
+					+ "JOIN film "
+					+ "ON film.id = film_actor.film_id\n " 
+					+ "WHERE film.id = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, filmId);
 			ResultSet rs = pstmt.executeQuery();
