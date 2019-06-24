@@ -11,7 +11,7 @@ import com.skilldistillery.filmquery.entities.Film;
 public class FilmQueryApp {
 
 	DatabaseAccessor db = new DatabaseAccessorObject();
-	boolean run = true;
+	boolean run = false;
 
 	public static void main(String[] args) throws ClassNotFoundException {
 		FilmQueryApp app = new FilmQueryApp();
@@ -29,66 +29,67 @@ public class FilmQueryApp {
 
 	private void launch() {
 		Scanner input = new Scanner(System.in);
-		while (run)
+		do {
 			try {
 				startUserInterface(input);
 			} catch (Exception e) {
 				System.out.println("Invalid input");
 				System.out.println();
+				startUserInterface(input);
 				input.nextLine();
 			}
 
+		} while (!run);
 		input.close();
 	}
 
-	private void startUserInterface(Scanner input) throws Exception {
+	private void startUserInterface(Scanner input) {
+
 		System.out.println("+====================================+");
 		System.out.println("Welcome to Detlux Film's we can do the following for you:");
 		System.out.println("1. Look up a film by its id.");
 		System.out.println("2. Look up a film by a search keyword.");
 		System.out.println("3. Exit the application.");
 		System.out.println("+====================================+");
-
-		int userInput;
+		int userInput = 0;
 		try {
 			userInput = input.nextInt();
-			switch (userInput) {
-			case 1:
-				System.out.println("Please enter an ID number");
-				int idNumber;
-				try {
-					idNumber = input.nextInt();
-					Film filmById = db.findFilmById(idNumber);
-					System.out.println(filmById);
-				} catch (Exception e) {
-					System.out.println("Film not found");
-				}
-				break;
-			case 2:
-				System.out.println("Please enter a Key word");
-				String userKeyWord;
-				try {
-					userKeyWord = input.next();
-					for (Film movie : db.findFilmByKeyWord(userKeyWord)) {
-						if (movie instanceof Film) {
-							System.out.println(movie);
-							List<Actor> actors = db.findActorsByFilmId(movie.getId());
-							System.out.println(actors);
-						} else {
-							System.out.println("There is no film with the word" + userKeyWord);
-						}
-					}
-				} catch (Exception e) {
-					System.out.println("That's an invalid input");
-				}
+		} catch (Exception e1) {
+			System.out.println("invalid input");
 
-				break;
-			case 3:
-				run = false;
+		}
+		switch (userInput) {
+		case 1:
+			System.out.println("Please enter an ID number");
+			int idNumber;
+			idNumber = input.nextInt();
+			Film filmById = db.findFilmById(idNumber);
+			if (filmById instanceof Film) {
+				System.out.println(filmById);
+			} else {
+				System.out.println("Film not found");
+				idNumber = input.nextInt();
 			}
-		} catch (Exception e) {
-			input.hasNextInt();
-			System.out.println("Thats not a valid input");
+			break;
+		case 2:
+			System.out.println("Please enter a Key word");
+			String userKeyWord;
+			userKeyWord = input.next();
+			for (Film movie : db.findFilmByKeyWord(userKeyWord)) {
+				if (movie instanceof Film) {
+					System.out.println(movie);
+					List<Actor> actors = db.findActorsByFilmId(movie.getId());
+					System.out.println(actors);
+				} else {
+					System.out.println("There is no film with the word" + userKeyWord);
+				}
+			}
+
+			break;
+		case 3:
+			System.out.println("Good bye");
+			run = true;
+
 		}
 
 	}
