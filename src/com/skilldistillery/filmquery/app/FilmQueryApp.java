@@ -1,7 +1,6 @@
 package com.skilldistillery.filmquery.app;
 
 import java.util.*;
-import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
@@ -66,6 +65,8 @@ public class FilmQueryApp {
 			Film filmById = db.findFilmById(idNumber);
 			if (filmById instanceof Film) {
 				System.out.println(filmById);
+				List<Actor> actors = db.findActorsByFilmId(filmById.getId());
+				System.out.println(actors);
 			} else {
 				System.out.println("Film not found");
 				idNumber = input.nextInt();
@@ -73,16 +74,16 @@ public class FilmQueryApp {
 			break;
 		case 2:
 			System.out.println("Please enter a Key word");
-			String userKeyWord;
-			userKeyWord = input.next();
-			for (Film movie : db.findFilmByKeyWord(userKeyWord)) {
-				if (movie instanceof Film) {
+			String userKeyWord = input.next();
+			List<Film> films = db.findFilmByKeyWord(userKeyWord);
+			if (films instanceof Film) {
+				for (Film movie : films) {
 					System.out.println(movie);
 					List<Actor> actors = db.findActorsByFilmId(movie.getId());
 					System.out.println(actors);
-				} else {
-					System.out.println("There is no film with the word" + userKeyWord);
 				}
+			} else {
+				System.out.println("There is no film with the word" + " " + userKeyWord);
 			}
 
 			break;

@@ -241,9 +241,9 @@ public class Film {
 
 	@Override
 	public String toString() {
-		return "Film:  id:" + "\t " + id + " \ntitle:" + "\t" + title + " \ndescription:" + "\t" + description + " \nreleaseYear:" + "\t" + releaseYear
+		return "Film: \t id:" + "\t " + id + " \ntitle:" + "\t" + title + " \ndescription:" + "\t" + description + " \nreleaseYear:" + "\t" + releaseYear
 				+ " \nlanguageId:" + "\t" + languageId + " \nrentalDuration:" + "\t" + rentalDuration + " \nrentalRate:" + "\t" + rentalRate
-				+ " \nlength:" + length + ", \nreplacementCost:" + replacementCost + ", \nrating:" + rating
+				+ " \nlength:" + "\t" + length + ", \nreplacementCost:" + "\t" + replacementCost + ", \nrating:" + "\t" + rating
 				+ " \nspecialFeatures:" + "\t" + specialFeatures + " \nlanguage:" + "\t" + language;
 	}
 	public void printActors() {
