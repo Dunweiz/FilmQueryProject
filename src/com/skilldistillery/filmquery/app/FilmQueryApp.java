@@ -55,7 +55,7 @@ public class FilmQueryApp {
 			userInput = input.nextInt();
 		} catch (Exception e1) {
 			System.out.println("invalid input");
-
+			launch();
 		}
 		switch (userInput) {
 		case 1:
@@ -84,7 +84,7 @@ public class FilmQueryApp {
 					System.out.println(actors);
 				}
 			} else {
-				System.out.println("There is no film with the word" + " " + userKeyWord);
+				System.out.println("There is no film with the Key word" + " " + userKeyWord);
 			}
 
 			break;

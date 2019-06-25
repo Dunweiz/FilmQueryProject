@@ -110,9 +110,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 					+ "FROM actor "
 					+ "JOIN film_actor "
 					+ "ON actor.id = film_actor.actor_id "
-					+ "JOIN film "
-					+ "ON film.id = film_actor.film_id "
-					+ "WHERE film.id = ?";
+//					+ "JOIN film "
+//					+ "ON film.id = film_actor.film_id "
+					+ "WHERE film_actor.film_id = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, filmId);
 			ResultSet rs = pstmt.executeQuery();
