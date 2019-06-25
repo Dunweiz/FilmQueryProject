@@ -65,8 +65,9 @@ public class FilmQueryApp {
 			Film filmById = db.findFilmById(idNumber);
 			if (filmById instanceof Film) {
 				System.out.println(filmById);
-				List<Actor> actors = db.findActorsByFilmId(filmById.getId());
-				System.out.println(actors);
+				List<Actor> actor = db.findActorsByFilmId(filmById.getId());
+				System.out.print("Actors: \t");
+				System.out.println(actor);
 			} else {
 				System.out.println("Film not found");
 				idNumber = input.nextInt();
